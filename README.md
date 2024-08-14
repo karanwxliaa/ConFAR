@@ -59,9 +59,7 @@ The code utilizes multi-modal facial expression datasets, particularly Affwild2,
 1. **Affwild2 Dataset**: [Download from the official source](https://ibug.doc.ic.ac.uk/resources/aff-wild2/). Place the dataset files in the `Data/` directory.
 
 ## Training
-The repository is divided into modules for the different components of the ConFAR framework:
-
-### Continual Learning
+### Baselines
 To train the ConFAR baseline model 
 ```bash
 python main.py --dataset single --model_type vgg16face --model_name vgg16_pt
