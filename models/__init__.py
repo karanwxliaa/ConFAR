@@ -6,4 +6,4 @@ from . import senet
 from . import custom_cnn
 from . import causal_cnn
 from . import causal_wrapper
-# from . import vgg16face
+from . import vgg16face
