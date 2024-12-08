@@ -21,9 +21,9 @@ from importlib import import_module
 from .default import NormalNN
 from .regularization import SI, L2, EWC, MAS
 from dataloaders.wrapper import Storage
-from .LGR import lgr_utils
-from .LGR.encoder import Classifier
-from .LGR.autoencoder_latent import AutoEncoderLatent
+# from .LGR import lgr_utils
+# from .LGR.encoder import Classifier
+# from .LGR.autoencoder_latent import AutoEncoderLatent
 from .default import NormalNN
 
 
