@@ -357,7 +357,7 @@ class UnifiedDataset(Dataset):
 
 #CONFAR LOADING FUNCTIONS
     
-def load_ConFAR_UB( image_size, aug):
+def load_ConFAR_UB(image_size, aug):
     train_transform, val_transform = load_transforms(image_size=image_size, aug=aug)
 
     affwild2 = './data/affwild2'
