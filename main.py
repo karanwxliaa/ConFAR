@@ -8,6 +8,8 @@ from collections import OrderedDict
 import agents
 from dataloaders.base import load_ConFAR,load_ConFAR_UB #,load_ConFAR_AF2
 import warnings
+from torch.utils.data import Subset
+
 warnings.filterwarnings("ignore")
 
 import logging
@@ -17,14 +19,20 @@ def run(args):
     if not os.path.exists('outputs'):
         os.mkdir('outputs')
 
-    if args.bound == 'UB':
-        train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR_UB(image_size=args.image_size, aug=args.train_aug)
-    else:
-        if args.dataset == 'single':
-            train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR_UB(image_size=args.image_size, aug=args.train_aug)
-        else:
-            train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR(image_size=args.image_size, aug=args.train_aug)
-        
+    # if args.bound == 'UB':
+    #     train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR_UB(image_size=args.image_size, aug=args.train_aug)
+    # else:
+    #     if args.dataset == 'single':
+    #         train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR_UB(image_size=args.image_size, aug=args.train_aug)
+    #     else:
+    #         train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR(image_size=args.image_size, aug=args.train_aug)
+
+    train_dataset_splits, val_dataset_splits, task_output_space = load_ConFAR_UB(image_size=args.image_size, aug=args.train_aug)
+
+    if args.datasize:
+        for task in train_dataset_splits:
+            train_dataset_splits[task] = Subset(train_dataset_splits[task], range(min(len(train_dataset_splits[task]), args.datasize)))
+            val_dataset_splits[task] = Subset(val_dataset_splits[task], range(min(len(val_dataset_splits[task]), args.datasize)))
     logging.info("------------------------------------------------------------")
     print("------------------------------------------------------------")
     # # Print the shape of a sample from the training datasets
@@ -184,6 +192,7 @@ def get_args(argv):
                         help="The number of output node in the single-headed model increases along with new categories.")
     parser.add_argument('--category', type=str, default='ConFAR', help="The Category (FER, AU, AV, ConFAR)")
     parser.add_argument('--image_size', type=int, default=224, help="Image Size(M) such that MxMx3")
+    parser.add_argument('--datasize', type=int, default=None, help="Maximum number of images to use from the dataset")
     parser.add_argument('--bound', type=str, default="lower", help="to calc LB / UB")
     args = parser.parse_args(argv)
     return args
