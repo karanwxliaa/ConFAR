@@ -84,7 +84,7 @@ If you find this work useful in your research, please consider citing:
   title={ConFAR: Continual Multi-Modal Facial Expression Analysis Using Causal Rehearsal and Multi-Task Learning},
   author={Jaskaran Singh Walia and Nikhil Churamani and Jiaee Cheong and Hatice Gunes},
   journal={[Journal/Conference]},
-  year={2024}
+  year={2025}
 }
 ```
 
